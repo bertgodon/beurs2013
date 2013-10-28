@@ -67,11 +67,6 @@
 	<div class="graph">
 		<canvas id="canvas" height="450" width="600"></canvas>
 	</div>
-	<div class="message">
-		<p style="text-color=red'">Volg de prijzen live op u smartphone!</p>
-		<p>Connecteer op onze WIFI en surf naar :</p>
-		<p>http://192.168.0.191:8080</p>
-	</div>
 <!-- 		<input type="button" class="refresh" value="Prijzen vernieuwen"/> -->
 	
 </div>
