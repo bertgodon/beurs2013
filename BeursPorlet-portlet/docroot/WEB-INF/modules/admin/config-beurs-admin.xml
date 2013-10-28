@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<import resource="webflow-config.xml"/>
+	
+<!-- 	<bean id="adminApp" class=" be.scouts.beurs.admin.BeursAdminController"> -->
+<!-- 		<property name="drankService" ref="drankService" /> -->
+<!-- 	</bean> -->
+	<bean id="drankService" class="be.scouts.beurs.repo.JdbcDrankRepo">
+		<constructor-arg  ref="dataSource" />
+	</bean> 
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/beursschema" />
+		<property name="username" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	
+
+	<bean id="portletModeHandlerMapping" class="org.springframework.web.portlet.handler.PortletModeHandlerMapping">
+		<property name="portletModeMap">
+			<map>
+				<entry key="view">                                                  
+					<bean class="be.scouts.beurs.flowhandler.MyFlowHandler" />                                 
+	    		</entry>                                                             
+	   		</map>
+ 		</property>
+	</bean>
+
+	<bean class="org.springframework.webflow.mvc.portlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor" />
+	</bean>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+			<property name="prefix" value="/WEB-INF/modules/admin/jsp/" />
+			<property name="suffix" value=".jsp" />
+	</bean>	
+</beans>

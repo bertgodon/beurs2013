@@ -1,0 +1,557 @@
+Public Class frmbeurs
+    Dim intAantalverkocht1 As Integer = 0
+    Dim intAantalverkocht2 As Integer = 0
+    Dim intAantalverkocht3 As Integer = 0
+    Dim intAantalverkocht4 As Integer = 0
+    Dim intAantalverkocht5 As Integer = 0
+    Dim intAantalverkocht6 As Integer = 0
+    Dim intAantalverkocht7 As Integer = 0
+    Dim intdrank1 As Integer = 0
+    Dim intdrank2 As Integer = 0
+    Dim intdrank3 As Integer = 0
+    Dim intdrank4 As Integer = 0
+    Dim intdrank5 As Integer = 0
+    Dim intdrank6 As Integer = 0
+    Dim intdrank7 As Integer = 0
+    Dim intprijs1 As Double = 0
+    Dim intprijs2 As Double = 0
+    Dim intprijs3 As Double = 0
+    Dim intprijs4 As Double = 0
+    Dim intprijs5 As Double = 0
+    Dim intprijs6 As Double = 0
+    Dim intprijs7 As Double = 0
+    Dim intminimumprijs1 As Double = 0
+    Dim intminimumprijs2 As Double = 0
+    Dim intminimumprijs3 As Double = 0
+    Dim intminimumprijs4 As Double = 0
+    Dim intminimumprijs5 As Double = 0
+    Dim intminimumprijs6 As Double = 0
+    Dim intminimumprijs7 As Double = 0
+    Dim intTeller As Integer = 0
+    Dim strpaswoord As String = "scouts"
+    Dim strpaswoordtest As String = ""
+    Dim intTeBetalen As Double = 0
+    'initialisatie van alles
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Timer1.Enabled = True
+        Timer1.Interval = 1000
+        intTeller = 30
+        lblklok.Text = intTeller
+        lblTeBetalen.Text = CStr(intTeBetalen)
+
+        'beveiliging via eventueel paswoord
+        strpaswoordtest = InputBox("geef het paswoord in dat je gekregen hebt van den baloe.", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+        If strpaswoord <> strpaswoordtest Then
+            MessageBox.Show("Je bent niet gemachtigd om dit programma te gebruiken.", "Geen toegang", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Me.Close()
+        Else
+            MessageBox.Show("Welkom in het beursprogramma van baloe." & vbCrLf & "Zorg dat ze zat zijn!!", "Welkom", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1)
+        End If
+
+        'invullen van dranknaam en prijs in opstartfase.
+        lblDrank1.Text = "Stella"
+        intprijs1 = 1
+        intminimumprijs1 = 0.65
+        Label1.Text = lblDrank1.Text
+        Label6.Text = lblDrank1.Text
+        output.lbldrank1.Text = lblDrank1.Text
+
+        lblDrank2.Text = "Vedette"
+        intprijs2 = 2
+        intminimumprijs2 = 1.1
+        Label2.Text = lblDrank2.Text
+        Label7.Text = lblDrank2.Text
+        output.lbldrank2.Text = lblDrank2.Text
+
+        lblDrank3.Text = "La Chouffe"
+        intprijs3 = 1.8
+        intminimumprijs3 = 1.5
+        Label3.Text = lblDrank3.Text
+        Label8.Text = lblDrank3.Text
+        output.lbldrank3.Text = lblDrank3.Text
+
+        lblDrank4.Text = "Duvel"
+        intprijs4 = 2
+        intminimumprijs4 = 1.25
+        Label4.Text = lblDrank4.Text
+        Label9.Text = lblDrank4.Text
+        output.lbldrank4.Text = lblDrank4.Text
+
+        lblDrank5.Text = "Salitos"
+        intprijs5 = 3
+        intminimumprijs5 = 1.75
+        Label5.Text = lblDrank5.Text
+        Label10.Text = lblDrank5.Text
+        output.lbldrank5.Text = lblDrank5.Text
+
+        lbldrank6.Text = "Ciney"
+        intprijs6 = 1.8
+        intminimumprijs6 = 1.1
+        Labe6.Text = lbldrank6.Text
+        Label11.Text = lbldrank6.Text
+        output.lbldrank6.Text = lbldrank6.Text
+
+        lbldrank7.Text = "Manneke Pils"
+        intprijs7 = 1.2
+        intminimumprijs7 = 0.75
+        Labe7.Text = lbldrank7.Text
+        Label12.Text = lbldrank7.Text
+        output.lblDrank7.Text = lbldrank7.Text
+
+        txtdrank1.Text = 0
+        txtdrank2.Text = 0
+        txtdrank3.Text = 0
+        txtdrank4.Text = 0
+        txtdrank5.Text = 0
+        txtdrank6.Text = 0
+        txtDrank7.Text = 0
+        txtTotaal1.Text = 0
+        txtTotaal2.Text = 0
+        txtTotaal3.Text = 0
+        txtTotaal4.Text = 0
+        txtTotaal5.Text = 0
+        txtTotaal6.Text = 0
+        txtTotaal7.Text = 0
+        txtPrijs1.Text = CStr(intprijs1)
+        txtPrijs2.Text = CStr(intprijs2)
+        txtPrijs3.Text = CStr(intprijs3)
+        txtPrijs4.Text = CStr(intprijs4)
+        txtPrijs5.Text = CStr(intprijs5)
+        TxtPrijs6.Text = CStr(intprijs6)
+        TxtPrijs7.Text = CStr(intprijs7)
+        output.txtPrijs1.Text = CStr(intprijs1) & " €"
+        output.txtPrijs2.Text = CStr(intprijs2) & " €"
+        output.txtPrijs3.Text = CStr(intprijs3) & " €"
+        output.txtPrijs4.Text = CStr(intprijs4) & " €"
+        output.txtPrijs5.Text = CStr(intprijs5) & " €"
+        output.txtPrijs6.Text = CStr(intprijs6) & " €"
+        output.txtPrijs7.Text = CStr(intprijs7) & " €"
+        output.Visible = True
+
+    End Sub
+
+
+    'toevoegen van dranken in de totalen
+
+    Private Sub btnDrank1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank1.Click
+        If Not (IsNumeric(txtdrank1.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal1.Text = CInt(txtTotaal1.Text) + CInt(txtdrank1.Text)
+            txtdrank1.Text = 0
+        End If
+    End Sub
+
+
+    Private Sub btnDrank2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank2.Click
+        If Not (IsNumeric(txtdrank2.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal2.Text = CInt(txtTotaal2.Text) + CInt(txtdrank2.Text)
+            txtdrank2.Text = 0
+        End If
+    End Sub
+
+    Private Sub btnDrank3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank3.Click
+        If Not (IsNumeric(txtdrank3.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal3.Text = CInt(txtTotaal3.Text) + CInt(txtdrank3.Text)
+            txtdrank3.Text = 0
+        End If
+    End Sub
+
+    Private Sub btnDrank4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank4.Click
+        If Not (IsNumeric(txtdrank4.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal4.Text = CInt(txtTotaal4.Text) + CInt(txtdrank4.Text)
+            txtdrank4.Text = 0
+        End If
+    End Sub
+
+    Private Sub btnDrank5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank5.Click
+        If Not (IsNumeric(txtdrank5.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal5.Text = CInt(txtTotaal5.Text) + CInt(txtdrank5.Text)
+            txtdrank5.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub btnDrank6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank6.Click
+        If Not (IsNumeric(txtdrank6.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal6.Text = CInt(txtTotaal6.Text) + CInt(txtdrank6.Text)
+            txtdrank6.Text = 0
+        End If
+
+    End Sub
+
+    Private Sub btnDrank7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank7.Click
+        If Not (IsNumeric(txtDrank7.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtTotaal7.Text = CInt(txtTotaal7.Text) + CInt(txtDrank7.Text)
+            txtDrank7.Text = 0
+        End If
+
+    End Sub
+
+    'aanpassen van prijzen van drank 
+
+    Private Sub btnaanpas1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas1.Click
+        intprijs1 = InputBox("geef de aangepaste prijs van product 1 in", "correctie prijs")
+        If Not (IsNumeric(intprijs1)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            txtPrijs1.Text = CStr(intprijs1)
+            output.txtPrijs1.Text = CStr(intprijs1) & " €"
+        End If
+    End Sub
+
+    Private Sub btnaanpas2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas2.Click
+        If Not (IsNumeric(intprijs2)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs2 = InputBox("geef de aangepaste prijs van product 2 in", "correctie prijs")
+            txtPrijs2.Text = CStr(intprijs2)
+            output.txtPrijs2.Text = CStr(intprijs2) & " €"
+        End If
+    End Sub
+
+    Private Sub btnaanpas3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas3.Click
+        If Not (IsNumeric(intprijs3)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs3 = InputBox("geef de aangepaste prijs van product 3 in", "correctie prijs")
+            txtPrijs3.Text = CStr(intprijs3)
+            output.txtPrijs3.Text = CStr(intprijs3) & " €"
+        End If
+
+    End Sub
+
+    Private Sub btnaanpas4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas4.Click
+        If Not (IsNumeric(intprijs4)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs4 = InputBox("geef de aangepaste prijs van product 4 in", "correctie prijs")
+            txtPrijs4.Text = CStr(intprijs4)
+            output.txtPrijs4.Text = CStr(intprijs4) & " €"
+        End If
+    End Sub
+
+    Private Sub btnaanpas5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas5.Click
+        If Not (IsNumeric(intprijs5)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs5 = InputBox("geef de aangepaste prijs van product 5 in", "correctie prijs")
+            txtPrijs5.Text = CStr(intprijs5)
+            output.txtPrijs5.Text = CStr(intprijs5) & " €"
+        End If
+    End Sub
+
+    Private Sub btnaanpas6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas6.Click
+        If Not (IsNumeric(intprijs6)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs6 = InputBox("geef de aangepaste prijs van product 6 in", "correctie prijs")
+            TxtPrijs6.Text = CStr(intprijs6)
+            output.txtPrijs6.Text = CStr(intprijs6) & " €"
+        End If
+    End Sub
+
+    Private Sub btnaanpas7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnaanpas7.Click
+        If Not (IsNumeric(intprijs7)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intprijs7 = InputBox("geef de aangepaste prijs van product 7 in", "correctie prijs")
+            TxtPrijs7.Text = CStr(intprijs7)
+            output.txtPrijs7.Text = CStr(intprijs7) & " €"
+        End If
+    End Sub
+
+
+
+    'happy hour voor eventueel gebruik
+    Private Sub btnHappyHour_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnHappyHour.Click
+        lblHappyHour.Visible = True
+        intprijs1 = intprijs1 / 2
+        intprijs2 = intprijs2 / 2
+        intprijs3 = intprijs3 / 2
+        intprijs4 = intprijs4 / 2
+        intprijs5 = intprijs5 / 2
+        intprijs6 = intprijs6 / 2
+        intprijs7 = intprijs7 / 2
+        txtPrijs1.Text = CStr(intprijs1)
+        txtPrijs2.Text = CStr(intprijs2)
+        txtPrijs3.Text = CStr(intprijs3)
+        txtPrijs4.Text = CStr(intprijs4)
+        txtPrijs5.Text = CStr(intprijs5)
+        TxtPrijs6.Text = CStr(intprijs6)
+        TxtPrijs7.Text = CStr(intprijs7)
+        btnHappyHour.Enabled = False
+        btnstopHappyHour.enabled = True
+
+
+    End Sub
+
+    Private Sub btnStopHappyHour_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStopHappyHour.Click
+        lblHappyHour.Visible = False
+        btnHappyHour.Enabled = True
+        btnStopHappyHour.Enabled = False
+        intprijs1 = intprijs1 * 2
+        intprijs2 = intprijs2 * 2
+        intprijs3 = intprijs3 * 2
+        intprijs4 = intprijs4 * 2
+        intprijs5 = intprijs5 * 2
+        intprijs6 = intprijs6 * 2
+        intprijs7 = intprijs7 * 2
+        txtPrijs1.Text = CStr(intprijs1)
+        txtPrijs2.Text = CStr(intprijs2)
+        txtPrijs3.Text = CStr(intprijs3)
+        txtPrijs4.Text = CStr(intprijs4)
+        txtPrijs5.Text = CStr(intprijs5)
+        TxtPrijs6.Text = CStr(intprijs6)
+        TxtPrijs7.Text = CStr(intprijs7)
+        output.txtPrijs1.Text = CStr(intprijs1) & " €"
+
+
+    End Sub
+
+
+    'berekening op oude manier van Erik schoonvliet
+    Private Sub btnBereken_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBereken.Click
+
+        'resetten van de klok
+        If Not (IsNumeric(txtteller.Text)) Then
+            MessageBox.Show("geef een getal in geen letter")
+        Else
+            intTeller = CInt(txtteller.Text)
+            Timer1.Start()
+        End If
+
+        'totaal uitrekenen van deze verkoop
+        intTeBetalen = 0
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal1.Text) * CDbl(txtPrijs1.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal2.Text) * CDbl(txtPrijs2.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal3.Text) * CDbl(txtPrijs3.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal4.Text) * CDbl(txtPrijs4.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal5.Text) * CDbl(txtPrijs5.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal6.Text) * CDbl(TxtPrijs6.Text)
+        intTeBetalen = intTeBetalen + CDbl(txtTotaal7.Text) * CDbl(TxtPrijs7.Text)
+        lblVorigtotaal.Text = lblTeBetalen.Text
+        lblTeBetalen.Text = CStr(intTeBetalen) & "€"
+
+
+        intAantalverkocht1 = CInt(txtTotaal1.Text)
+        intAantalverkocht2 = CInt(txtTotaal2.Text)
+        intAantalverkocht3 = CInt(txtTotaal3.Text)
+        intAantalverkocht4 = CInt(txtTotaal4.Text)
+        intAantalverkocht5 = CInt(txtTotaal5.Text)
+        intAantalverkocht6 = CInt(txtTotaal6.Text)
+        intAantalverkocht7 = CInt(txtTotaal7.Text)
+
+        ' berekeningen algoritme 
+
+        intprijs1 = intprijs1 + intAantalverkocht1 * 3 / 100
+        intprijs1 = intprijs1 - intAantalverkocht2 * 3 / 100 / 5
+        intprijs1 = intprijs1 - intAantalverkocht3 * 3 / 100 / 5
+        intprijs1 = intprijs1 - intAantalverkocht4 * 3 / 100 / 5
+        intprijs1 = intprijs1 - intAantalverkocht5 * 3 / 100 / 5
+        intprijs1 = intprijs1 - intAantalverkocht6 * 3 / 100 / 5
+        intprijs1 = intprijs1 - intAantalverkocht7 * 3 / 100 / 5
+
+        intprijs2 = intprijs2 + intAantalverkocht2 * 4 / 100
+        intprijs2 = intprijs2 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs2 = intprijs2 - intAantalverkocht3 * 4 / 100 / 5
+        intprijs2 = intprijs2 - intAantalverkocht4 * 4 / 100 / 5
+        intprijs2 = intprijs2 - intAantalverkocht5 * 4 / 100 / 5
+        intprijs2 = intprijs2 - intAantalverkocht6 * 4 / 100 / 5
+        intprijs2 = intprijs2 - intAantalverkocht7 * 4 / 100 / 5
+
+        intprijs3 = intprijs3 + intAantalverkocht3 * 4 / 100
+        intprijs3 = intprijs3 - intAantalverkocht2 * 4 / 100 / 5
+        intprijs3 = intprijs3 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs3 = intprijs3 - intAantalverkocht4 * 4 / 100 / 5
+        intprijs3 = intprijs3 - intAantalverkocht5 * 4 / 100 / 5
+        intprijs3 = intprijs3 - intAantalverkocht6 * 4 / 100 / 5
+        intprijs3 = intprijs3 - intAantalverkocht7 * 4 / 100 / 5
+
+        intprijs4 = intprijs4 + intAantalverkocht4 * 4 / 100
+        intprijs4 = intprijs4 - intAantalverkocht2 * 4 / 100 / 5
+        intprijs4 = intprijs4 - intAantalverkocht3 * 4 / 100 / 5
+        intprijs4 = intprijs4 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs4 = intprijs4 - intAantalverkocht5 * 4 / 100 / 5
+        intprijs4 = intprijs4 - intAantalverkocht6 * 4 / 100 / 5
+        intprijs4 = intprijs4 - intAantalverkocht7 * 4 / 100 / 5
+
+        intprijs5 = intprijs5 + intAantalverkocht5 * 4 / 100
+        intprijs5 = intprijs5 - intAantalverkocht2 * 4 / 100 / 5
+        intprijs5 = intprijs5 - intAantalverkocht3 * 4 / 100 / 5
+        intprijs5 = intprijs5 - intAantalverkocht4 * 4 / 100 / 5
+        intprijs5 = intprijs5 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs5 = intprijs5 - intAantalverkocht6 * 4 / 100 / 5
+        intprijs5 = intprijs5 - intAantalverkocht7 * 4 / 100 / 5
+
+        intprijs6 = intprijs6 + intAantalverkocht6 * 4 / 100
+        intprijs6 = intprijs6 - intAantalverkocht2 * 4 / 100 / 5
+        intprijs6 = intprijs6 - intAantalverkocht3 * 4 / 100 / 5
+        intprijs6 = intprijs6 - intAantalverkocht4 * 4 / 100 / 5
+        intprijs6 = intprijs6 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs6 = intprijs6 - intAantalverkocht6 * 4 / 100 / 5
+        intprijs6 = intprijs6 - intAantalverkocht7 * 4 / 100 / 5
+
+        intprijs7 = intprijs7 + intAantalverkocht7 * 4 / 100
+        intprijs7 = intprijs7 - intAantalverkocht2 * 4 / 100 / 5
+        intprijs7 = intprijs7 - intAantalverkocht3 * 4 / 100 / 5
+        intprijs7 = intprijs7 - intAantalverkocht4 * 4 / 100 / 5
+        intprijs7 = intprijs7 - intAantalverkocht1 * 4 / 100 / 5
+        intprijs7 = intprijs7 - intAantalverkocht7 * 4 / 100 / 5
+        intprijs7 = intprijs7 - intAantalverkocht6 * 4 / 100 / 5
+
+        txtTotaal1.Text = 0
+        txtTotaal2.Text = 0
+        txtTotaal3.Text = 0
+        txtTotaal4.Text = 0
+        txtTotaal5.Text = 0
+        txtTotaal6.Text = 0
+        txtTotaal7.Text = 0
+
+        If intprijs1 < intminimumprijs1 Then
+            intprijs1 = intminimumprijs1
+        End If
+        If intprijs2 < intminimumprijs2 Then
+            intprijs2 = intminimumprijs2
+        End If
+        If intprijs3 < intminimumprijs3 Then
+            intprijs3 = intminimumprijs3
+        End If
+        If intprijs4 < intminimumprijs4 Then
+            intprijs4 = intminimumprijs4
+        End If
+        If intprijs5 < intminimumprijs5 Then
+            intprijs5 = intminimumprijs5
+        End If
+        If intprijs6 < intminimumprijs6 Then
+            intprijs6 = intminimumprijs6
+        End If
+        If intprijs7 < intminimumprijs7 Then
+            intprijs7 = intminimumprijs7
+        End If
+
+        txtPrijs1.Text = CStr(Math.Round(intprijs1, 2))
+        txtPrijs2.Text = CStr(Math.Round(intprijs2, 2))
+        txtPrijs3.Text = CStr(Math.Round(intprijs3, 2))
+        txtPrijs4.Text = CStr(Math.Round(intprijs4, 2))
+        txtPrijs5.Text = CStr(Math.Round(intprijs5, 2))
+        TxtPrijs6.Text = CStr(Math.Round(intprijs6, 2))
+        TxtPrijs7.Text = CStr(Math.Round(intprijs7, 2))
+        output.txtPrijs1.Text = CStr(Math.Round(intprijs1, 2)) & " €"
+        output.txtPrijs2.Text = CStr(Math.Round(intprijs2, 2)) & " €"
+        output.txtPrijs3.Text = CStr(Math.Round(intprijs3, 2)) & " €"
+        output.txtPrijs4.Text = CStr(Math.Round(intprijs4, 2)) & " €"
+        output.txtPrijs5.Text = CStr(Math.Round(intprijs5, 2)) & " €"
+        output.txtPrijs6.Text = CStr(Math.Round(intprijs6, 2)) & " €"
+        output.txtPrijs7.Text = CStr(Math.Round(intprijs7, 2)) & " €"
+        output.labelMessage.Text = txtMessage.Text
+    End Sub
+
+
+    'timer voor het instellen van een tijd om u te herinneren
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        intTeller = intTeller - 1
+
+        lblklok.Text = intTeller
+        If intTeller = 0 Then
+            lblklok.Text = "herbereken"
+            intTeller = CInt(txtTeller.text)
+            Timer1.Stop()
+
+        End If
+
+
+    End Sub
+
+    Private Sub SluitenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SluitenToolStripMenuItem.Click
+        Dim resultaat As Integer
+
+        resultaat = MessageBox.Show("weet je zeker dat je wil afsluiten?", "afsluiten", MessageBoxButtons.OKCancel, MessageBoxIcon.Stop)
+
+        If resultaat = 1 Then
+            Me.Close()
+        End If
+
+
+    End Sub
+
+    'de helpfunctie oproepen
+    Private Sub HelpToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HelpToolStripMenuItem1.Click
+        MessageBox.Show("dit is den uitleg over het programma")
+    End Sub
+
+    'besturing van de knoppen om +5 te doen in 1 keer
+
+    Private Sub btndrank1Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btndrank1Plus.Click
+        txtTotaal1.Text = CInt(txtTotaal1.Text) + 5
+    End Sub
+
+    Private Sub btnDrank2Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank2Plus.Click
+        txtTotaal2.Text = CInt(txtTotaal2.Text) + 5
+    End Sub
+
+    Private Sub btnDrank3Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank3Plus.Click
+        txtTotaal3.Text = CInt(txtTotaal3.Text) + 5
+    End Sub
+
+    Private Sub btnDrank4Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank4Plus.Click
+        txtTotaal4.Text = CInt(txtTotaal4.Text) + 5
+    End Sub
+
+    Private Sub btnDrank5Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank5Plus.Click
+        txtTotaal5.Text = CInt(txtTotaal5.Text) + 5
+    End Sub
+
+    Private Sub btnDrank6Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank6plus.Click
+        txtTotaal6.Text = CInt(txtTotaal6.Text) + 5
+    End Sub
+
+    Private Sub btnDrank7Plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank7plus.Click
+        txtTotaal7.Text = CInt(txtTotaal7.Text) + 5
+    End Sub
+
+
+
+    'besturing van knoppen om +1 te doen 
+    Private Sub btnDrank1Plus1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDrank1Plus1.Click
+        txtTotaal1.Text = CInt(txtTotaal1.Text) + 1
+    End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        txtTotaal2.Text = CInt(txtTotaal2.Text) + 1
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        txtTotaal3.Text = CInt(txtTotaal3.Text) + 1
+    End Sub
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
+        txtTotaal4.Text = CInt(txtTotaal4.Text) + 1
+    End Sub
+
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+        txtTotaal5.Text = CInt(txtTotaal5.Text) + 1
+    End Sub
+    Private Sub Buttondrank6plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Buttondrank6plus.Click
+        txtTotaal6.Text = CInt(txtTotaal6.Text) + 1
+    End Sub
+    Private Sub Buttondrank7plus_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Buttondrank7plus.Click
+        txtTotaal7.Text = CInt(txtTotaal7.Text) + 1
+    End Sub
+
+
+  
+End Class

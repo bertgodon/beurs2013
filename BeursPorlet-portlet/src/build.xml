@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE project>
+
+<project name="BeursPorlet-portlet" basedir="." default="deploy">
+	<property file="../..build.BERT.properties" />
+	<import file="../../build-common-portlet.xml" />
+</project>

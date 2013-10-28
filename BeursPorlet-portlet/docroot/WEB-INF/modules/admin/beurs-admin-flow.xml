@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">	
+		<on-start>
+			<evaluate expression="adminApp.init()" result="flowScope.applData" />
+		</on-start>
+		
+		<view-state id="overview" model="applData" view="/WEB-INF/modules/admin/jsp/view.jsp">
+			<transition on="submit"  to="updateDb"/>
+			<transition on="manipulate" to="manipulate" />
+		</view-state>
+		
+		<view-state id="manipulate" model="applData" view="/WEB-INF/modules/admin/jsp/editprices.jsp">
+			<transition on="submit" to="updateprices"/>
+			<transition on="back" to="overview" bind="false" />
+		</view-state>
+		
+		<action-state id="updateDb">
+			<evaluate expression="adminApp.updateDb(applData)" />
+			<transition on="done" to="overview" />
+		</action-state>
+		
+		<action-state id="updateprices">
+			<evaluate expression="adminApp.update(applData)" />
+			<transition on="ok" to="overview"/>
+		</action-state>
+		
+		<bean-import resource="beurs-adminapp-config.xml"/>
+</flow>
