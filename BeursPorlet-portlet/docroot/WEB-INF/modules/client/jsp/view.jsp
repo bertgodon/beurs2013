@@ -8,7 +8,6 @@
 	var data;
 	var json;
 	var line;
-	var jos;
 	function updateGraph(number, obj){
 		if($(obj).is(':checked')){
 			beerPref[number-1] = true;
